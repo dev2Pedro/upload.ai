@@ -35,6 +35,8 @@ export function VideoInputForm() {
     if (!videoFile) {
       return;
     }
+
+    // converter o video em áudio
   }
 
   const previewURL = useMemo(() => {
