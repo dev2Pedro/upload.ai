@@ -14,8 +14,19 @@ import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import { api } from "@/lib/axios";
 
+type Status = "waiting" | "converting" | "uploading" | "generating" | "success";
+
+const statusMessages: Record<Exclude<Status, "waiting">, string> = {
+  converting: "Convertendo o video para áudio",
+  generating: "Gerando transcrição do vídeo",
+  uploading: "Enviando o áudio para o servidor",
+  success: "Transcrição gerada com sucesso!",
+};
+
 export function VideoInputForm() {
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<Status>("waiting");
+
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
 
   function handleFileSelected(event: ChangeEvent<HTMLInputElement>) {
@@ -80,6 +91,8 @@ export function VideoInputForm() {
       return;
     }
 
+    setStatus("converting");
+
     // converter o video em áudio
 
     const audioFile = await convertVideoToAudio(videoFile);
@@ -89,15 +102,19 @@ export function VideoInputForm() {
 
     data.append("file", audioFile);
 
+    setStatus("uploading");
+
     const response = await api.post("/videos", data);
 
     const videoId = response.data.video.id;
+
+    setStatus("generating");
 
     await api.post(`/videos/${videoId}/transcription`, {
       prompt,
     });
 
-    console.log("Finalizou");
+    setStatus("success");
   }
 
   const previewURL = useMemo(() => {
@@ -142,15 +159,23 @@ export function VideoInputForm() {
         <Label htmlFor="transcription_prompt">Prompt de transcrição</Label>
         <Textarea
           ref={promptInputRef}
+          disabled={status !== "waiting"}
           id="transcription_prompt"
           className="h-20 leading-relaxed resize-none"
           placeholder="Inclua palavras-chave mencionadas no video, separadas por vírgula (,)"
         />
       </div>
 
-      <Button type="submit" className="w-full">
-        Carregar video
-        <Upload className="w-4 h-4 ml-2" />
+      <Button disabled={status !== "waiting"} type="submit" className="w-full">
+        {status === "waiting" ? ( // Se o status FOR 'waiting'
+          <>
+            Carregar video
+            <Upload className="w-4 h-4 ml-2" />
+          </>
+        ) : (
+          // Senão (para todos os outros status)
+          statusMessages[status]
+        )}
       </Button>
     </form>
   );
