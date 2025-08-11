@@ -1,9 +1,6 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
-import coreURL from "../ffmpeg/ffmpeg-core.js?url";
-import wasmURL from "../ffmpeg/ffmpeg-core.wasm?url";
-import workerURL from "../ffmpeg/ffmpeg-worker.js?url";
 
-let ffmpeg: FFmpeg | null;
+let ffmpeg: FFmpeg | null = null;
 
 export async function getFFmpeg() {
   if (ffmpeg) {
@@ -13,10 +10,14 @@ export async function getFFmpeg() {
   ffmpeg = new FFmpeg();
 
   if (!ffmpeg.loaded) {
+    // Esta parte é a correção.
+    // Ela constrói as URLs dinamicamente em vez de tentar importar os arquivos.
+    const baseURL = new URL("/ffmpeg/", window.location.origin).toString();
+
     await ffmpeg.load({
-      coreURL,
-      wasmURL,
-      workerURL,
+      coreURL: `${baseURL}ffmpeg-core.js`,
+      wasmURL: `${baseURL}ffmpeg-core.wasm`,
+      workerURL: `${baseURL}ffmpeg-core.worker.js`,
     });
   }
 
