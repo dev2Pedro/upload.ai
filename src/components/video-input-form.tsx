@@ -20,7 +20,7 @@ const statusMessages: Record<Exclude<Status, "waiting">, string> = {
   converting: "Convertendo o video para áudio",
   generating: "Gerando transcrição do vídeo",
   uploading: "Enviando o áudio para o servidor",
-  success: "Transcrição gerada com sucesso!",
+  success: "sucesso!",
 };
 
 export function VideoInputForm() {
@@ -166,14 +166,18 @@ export function VideoInputForm() {
         />
       </div>
 
-      <Button disabled={status !== "waiting"} type="submit" className="w-full">
-        {status === "waiting" ? ( // Se o status FOR 'waiting'
+      <Button
+        data-success={status === "success"}
+        disabled={status !== "waiting"}
+        type="submit"
+        className="w-full data-[success=true]:bg-emerald-400"
+      >
+        {status === "waiting" ? (
           <>
             Carregar video
             <Upload className="w-4 h-4 ml-2" />
           </>
         ) : (
-          // Senão (para todos os outros status)
           statusMessages[status]
         )}
       </Button>
