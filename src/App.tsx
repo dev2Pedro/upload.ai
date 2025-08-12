@@ -74,7 +74,7 @@ export function App() {
           <Separator />
 
           <div className="space-y-2">
-            <Label>prompt</Label>
+            <Label>prompts</Label>
             <PromptSelect onPromptSelected={handlePromptSelected} />
           </div>
 
