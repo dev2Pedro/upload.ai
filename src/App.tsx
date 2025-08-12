@@ -14,8 +14,12 @@ import {
 } from "./components/ui/select";
 import { Slider } from "./components/ui/slider";
 import { VideoInputForm } from "./components/video-input-form";
+import { PromptSelect } from "./components/prompt-select";
 
 export function App() {
+  function handlePromptSelected(template: string) {
+    console.log(template);
+  }
   return (
     <div className="min-h-screen flex flex-col">
       <div className="px-6 py-3 flex items-center justify-between border-b">
@@ -71,17 +75,7 @@ export function App() {
 
           <div className="space-y-2">
             <Label>prompt</Label>
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Selecione um prompt..." />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="title">Título do YouTube</SelectItem>
-                <SelectItem value="description">
-                  Descrição do YouTube
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <PromptSelect onPromptSelected={handlePromptSelected} />
           </div>
 
           <form className="space-y-6">
