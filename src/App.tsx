@@ -16,13 +16,30 @@ import { Slider } from "./components/ui/slider";
 import { VideoInputForm } from "./components/video-input-form";
 import { PromptSelect } from "./components/prompt-select";
 import { useState } from "react";
+import { useCompletion } from "@ai-sdk/react";
 
 export function App() {
   const [temperature, setTemperature] = useState(0.5);
+  const [videoId, setVideoId] = useState<string | null>(null);
 
-  function handlePromptSelected(template: string) {
-    console.log(template);
-  }
+  const {
+    input,
+    setInput,
+    handleInputChange,
+    handleSubmit,
+    completion,
+    isLoading,
+  } = useCompletion({
+    api: "http://localhost:3333/ai/complete",
+    body: {
+      videoId,
+      temperature,
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="px-6 py-3 flex items-center justify-between border-b">
@@ -57,10 +74,13 @@ export function App() {
             <Textarea
               className="resize-none p-5 leading-relaxed"
               placeholder="Inclua o promt para a IA..."
+              value={input}
+              onChange={handleInputChange}
             />
             <Textarea
               className="resize-none p-5 leading-relaxed"
               placeholder="Resultado gerado pela IA..."
+              value={completion}
             />
           </div>
 
@@ -72,16 +92,16 @@ export function App() {
           </p>
         </div>
         <aside className="w-80 space-y-6">
-          <VideoInputForm />
+          <VideoInputForm onVideoUploaded={setVideoId} />
 
           <Separator />
 
-          <div className="space-y-2">
-            <Label>prompts</Label>
-            <PromptSelect onPromptSelected={handlePromptSelected} />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label>prompts</Label>
+              <PromptSelect onPromptSelected={setInput} />
+            </div>
 
-          <form className="space-y-6">
             <div className="space-y-2">
               <Label>Modelo</Label>
               <Select disabled defaultValue="gpt3.5">
@@ -118,7 +138,7 @@ export function App() {
 
             <Separator />
 
-            <Button type="submit" className="w-full">
+            <Button disabled={isLoading} type="submit" className="w-full">
               Executar
               <Wand2 className="h-4 w-4 ml-2" />
             </Button>
