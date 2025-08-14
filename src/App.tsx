@@ -16,40 +16,58 @@ import { Slider } from "./components/ui/slider";
 import { VideoInputForm } from "./components/video-input-form";
 import { PromptSelect } from "./components/prompt-select";
 import { useState } from "react";
-import { useCompletion } from "@ai-sdk/react";
 
 export function App() {
   const [temperature, setTemperature] = useState(0.5);
   const [videoId, setVideoId] = useState<string | null>(null);
+  const [input, setInput] = useState("");
+  const [completion, setCompletion] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    input,
-    setInput,
-    handleInputChange,
-    handleSubmit,
-    completion,
-    isLoading,
-  } = useCompletion({
-    api: "http://localhost:3333/ai/complete",
-    body: {
-      videoId,
-      temperature,
-    },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!videoId) {
+      alert("Selecione um vídeo primeiro!");
+      return;
+    }
+
+    setIsLoading(true);
+    setCompletion("");
+
+    try {
+      const res = await fetch("http://localhost:3333/ai/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ videoId, prompt: input, temperature }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao gerar texto");
+      }
+
+      const data = await res.json();
+      setCompletion(data.result);
+    } catch (error) {
+      console.error(error);
+      alert("Falha ao gerar o texto da IA.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <div className="px-6 py-3 flex items-center justify-between border-b">
         <h1 className="text-xl font-bold">upload.ai</h1>
-
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted-foreground">
             Desenvolvido com
           </span>
-
           <div className="flex items-center gap-2 text-muted-foreground">
             <FaReact className="w-5 h-5 text-cyan-400" title="React" />
             <SiTailwindcss
@@ -59,21 +77,20 @@ export function App() {
             <SiPrisma className="w-5 h-5 text-indigo-500" title="Prisma" />
             <SiShadcnui className="w-5 h-5 text-white" title="shadcn/ui" />
           </div>
-
           <Separator orientation="vertical" className="h-6" />
-
           <Button variant="outline">
             <FaGithub className="w-4 h-4 mr-2" />
             Github
           </Button>
         </div>
       </div>
+
       <main className="flex-1 p-6 flex gap-6">
         <div className="flex flex-col flex-1 gap-4">
           <div className="grid grid-rows-2 gap-4 flex-1">
             <Textarea
               className="resize-none p-5 leading-relaxed"
-              placeholder="Inclua o promt para a IA..."
+              placeholder="Inclua o prompt para a IA..."
               value={input}
               onChange={handleInputChange}
             />
@@ -81,6 +98,7 @@ export function App() {
               className="resize-none p-5 leading-relaxed"
               placeholder="Resultado gerado pela IA..."
               value={completion}
+              readOnly
             />
           </div>
 
@@ -91,9 +109,9 @@ export function App() {
             selecionado.
           </p>
         </div>
+
         <aside className="w-80 space-y-6">
           <VideoInputForm onVideoUploaded={setVideoId} />
-
           <Separator />
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -121,7 +139,6 @@ export function App() {
 
             <div className="space-y-4">
               <Label>Temperatura</Label>
-
               <Slider
                 min={0}
                 max={1}
@@ -129,10 +146,9 @@ export function App() {
                 value={[temperature]}
                 onValueChange={(value) => setTemperature(value[0])}
               />
-
               <span className="block text-xs text-muted-foreground italic leading-relaxed">
-                Valores mais altos, tendem a deixar o resultado mais criativo e
-                com possiveis erros.
+                Valores mais altos tendem a deixar o resultado mais criativo e
+                com possíveis erros.
               </span>
             </div>
 
