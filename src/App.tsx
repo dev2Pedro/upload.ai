@@ -78,9 +78,15 @@ export function App() {
             <SiShadcnui className="w-5 h-5 text-white" title="shadcn/ui" />
           </div>
           <Separator orientation="vertical" className="h-6" />
-          <Button variant="outline">
-            <FaGithub className="w-4 h-4 mr-2" />
-            Github
+          <Button variant="outline" asChild>
+            <a
+              href="https://github.com/dev2Pedro"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub className="w-4 h-4 mr-2" />
+              Github
+            </a>
           </Button>
         </div>
       </div>
