@@ -176,7 +176,7 @@ export function VideoInputForm(props: VideoInputFormProps) {
         data-success={status === "success"}
         disabled={status !== "waiting"}
         type="submit"
-        className="w-full data-[success=true]:bg-emerald-400"
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white data-[success=true]:bg-emerald-400 data-[success=true]:hover:bg-emerald-500"
       >
         {status === "waiting" ? (
           <>

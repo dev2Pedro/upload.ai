@@ -128,12 +128,14 @@ export function App() {
 
             <div className="space-y-2">
               <Label>Modelo</Label>
-              <Select disabled defaultValue="gpt3.5">
+              <Select disabled defaultValue="llama3-70b-8192">
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="gpt3.5">GPT 3.5-turbo 16k</SelectItem>
+                  <SelectItem value="llama3-70b-8192">
+                    llama3-70b-8192
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <span className="block text-xs text-muted-foreground">
@@ -151,6 +153,7 @@ export function App() {
                 step={0.1}
                 value={[temperature]}
                 onValueChange={(value) => setTemperature(value[0])}
+                className=" [&_[data-orientation=horizontal]>span]:bg-gradient-to-r [&_[data-orientation=horizontal]>span]:from-blue-500 [&_[data-orientation=horizontal]>span]:to-red-500"
               />
               <span className="block text-xs text-muted-foreground italic leading-relaxed">
                 Valores mais altos tendem a deixar o resultado mais criativo e
@@ -160,7 +163,11 @@ export function App() {
 
             <Separator />
 
-            <Button disabled={isLoading} type="submit" className="w-full">
+            <Button
+              disabled={isLoading}
+              type="submit"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+            >
               Executar
               <Wand2 className="h-4 w-4 ml-2" />
             </Button>
