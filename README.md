@@ -44,7 +44,7 @@ O projeto rodará normalmente em: [http://localhost:3000](http://localhost:3000)
 
 ### 1. Tela Inicial
 
-![image-al] (https://github.com/dev2Pedro/upload.ai/blob/a032c6dec8fded65587c547bf8597b3eaa4474c9/Tela%20Inicial.png)
+<img width="1694" height="981" alt="Image" src="https://github.com/user-attachments/assets/c706f488-f02c-4560-bd2b-74d0046b6123" />
 Aqui você insere o **prompt personalizado** para a IA e faz o upload do vídeo.
 
 ---
