@@ -2,23 +2,27 @@
 
 Upload.ai é uma aplicação que permite carregar vídeos, transcrevê-los automaticamente utilizando **Whisper Large v3**, e em seguida aplicar prompts de IA para gerar resumos, títulos para YouTube, sugestões de livros relacionados, descrições e muito mais. A aplicação também possibilita configurar parâmetros como **temperatura** para ajustar a criatividade das respostas.
 
----
+### 🚀 Tecnologias Utilizadas
 
-## 🚀 Tecnologias Utilizadas
+#### 🧩 Principais Tecnologias
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=react,vite,tailwind,prisma" />
+  <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcn/ui" />
+</p>
 
-* **Next.js** – Framework React para front-end.
-* **TailwindCSS** – Estilização.
-* **Groq API** – Para processamento de linguagem natural.
-* **LLaMA** – Modelo de linguagem utilizado para geração de texto.
-* **Whisper Large v3** – Modelo de transcrição de áudio/vídeo.
+#### 🤖 IA & Processamento de Linguagem
+<p align="left">
+  🟢 Groq API <br />
+  🦙 LLaMA <br />
+  🎤 Whisper Large v3
+</p>
 
----
 
 ## 📥 Como clonar o projeto
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-usuario/upload.ai.git
+git clone https://github.com/dev2Pedro/upload.ai.git
 
 # Entrar na pasta do projeto
 cd upload.ai
@@ -36,7 +40,7 @@ npm install
 npm run dev
 ```
 
-O projeto rodará normalmente em: [http://localhost:3000](http://localhost:3000)
+O projeto rodará normalmente em: [http://localhost:5173](http://localhost:5173)
 
 ---
 
@@ -45,34 +49,39 @@ O projeto rodará normalmente em: [http://localhost:3000](http://localhost:3000)
 ### 1. Tela Inicial
 
 <img width="1694" height="981" alt="Image" src="https://github.com/user-attachments/assets/c706f488-f02c-4560-bd2b-74d0046b6123" />
+
 Aqui você insere o **prompt personalizado** para a IA e faz o upload do vídeo.
 
 ---
 
 ### 2. Carregando um vídeo
 
-!\[Upload vídeo]\(/mnt/data/Captura de Tela 2025-08-18 às 12.44.22.png)
+<img width="1697" height="975" alt="Image" src="https://github.com/user-attachments/assets/8a2683f5-58d1-4c5d-9c3a-9d3308a6470a" />
+
 Após selecionar um vídeo, você pode adicionar palavras-chave no campo **Prompt de transcrição** para guiar a geração.
 
 ---
 
 ### 3. Transcrição e Prompt em execução
 
-!\[Transcrição e Prompt]\(/mnt/data/Captura de Tela 2025-08-18 às 12.45.59.png)
+<img width="1692" height="975" alt="Image" src="https://github.com/user-attachments/assets/856690a1-a7d8-46a7-ba14-0f6b024738ef" />
+
 O vídeo é processado pelo **Whisper Large v3** para gerar a transcrição. Em seguida, a IA utiliza o prompt definido para gerar resultados.
 
 ---
 
 ### 4. Resultado gerado pela IA
 
-!\[Resultado IA]\(/mnt/data/Captura de Tela 2025-08-18 às 12.46.41.png)
+<img width="1710" height="981" alt="Image" src="https://github.com/user-attachments/assets/4f23335d-9d47-4e4d-bf2c-0d82616e6640" />
+
 Exemplo de resumo do vídeo + recomendações de livros. A saída depende diretamente do prompt utilizado.
 
 ---
 
 ### 5. Prompts disponíveis
 
-!\[Prompts disponíveis]\(/mnt/data/Captura de Tela 2025-08-18 às 12.47.20.png)
+<img width="1710" height="981" alt="Image" src="https://github.com/user-attachments/assets/41c55bb4-ad17-4160-ae08-63c5766549a2" />
+
 A aplicação conta com prompts prontos como:
 
 * **Título YouTube**
