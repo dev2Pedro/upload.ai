@@ -4,7 +4,6 @@ Upload.ai é uma aplicação que permite carregar vídeos, transcrevê-los autom
 
 ### 🚀 Tecnologias Utilizadas
 
-#### 🧩 Principais Tecnologias
 <p align="left">
   <img src="https://skillicons.dev/icons?i=react,vite,tailwind,prisma" />
   <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcn/ui" />
