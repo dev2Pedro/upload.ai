@@ -105,11 +105,4 @@ Você pode utilizar a variável **{transcription}** no prompt para inserir autom
 
 ---
 
-## 📚 Exemplo de Uso
-
-* Subir um vídeo.
-* Selecionar o prompt **Resumo + Sugestão de Livros**.
-* A IA gera automaticamente um resumo do vídeo e recomenda 3 livros relacionados.
-
----
 
