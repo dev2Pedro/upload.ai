@@ -1,6 +1,6 @@
 # Upload.ai
 
-Upload.ai é uma a que permite carregar vídeos, transcrevê-los automaticamente utilizando **Whisper Large v3**, e em seguida aplicar prompts de IA para gerar resumos, títulos para YouTube, sugestões de livros relacionados, descrições e muito mais. A aplicação também possibilita configurar parâmetros como **temperatura** para ajustar a criatividade das respostas.
+Upload.ai é uma apli que permite carregar vídeos, transcrevê-los automaticamente utilizando **Whisper Large v3**, e em seguida aplicar prompts de IA para gerar resumos, títulos para YouTube, sugestões de livros relacionados, descrições e muito mais. A aplicação também possibilita configurar parâmetros como **temperatura** para ajustar a criatividade das respostas.
 
 ### 🚀 Tecnologias Utilizadas
 
