@@ -43,7 +43,7 @@ O projeto rodará normalmente em: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🖼️ Funcionalidades em deta
+## 🖼️ Funcionalidades em detalhes
 
 ### 1. Tela Inicial
 
