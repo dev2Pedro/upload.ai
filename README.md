@@ -17,7 +17,7 @@ Upload.ai é uma aplicação que permite carregar vídeos, transcrevê-los autom
 </p>
 
 
-## 📥 Como
+## 📥 Como clonar
 
 ```bash
 # Clonar o repositório
